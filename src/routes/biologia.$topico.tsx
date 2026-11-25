@@ -37,10 +37,10 @@ function Lesson() {
     <BiologyDiagram topic={number}/>
     <h2>{number}.4 · Prática com feedback</h2>
     {lesson.practice.map(([question, answer]) => <section className="concept" key={question}><p>{question}</p><details><summary>Conferir resolução</summary><p>{answer}</p></details></section>)}
-    <p className="editorial-note">UAN · Medicina · 2026/2027 · Tópicos para o Exame de Acesso, PDF p. {topic.page} / impressa p. {topic.page-1}. Referência didáctica: <a href="https://openstax.org/details/books/biology-2e">OpenStax Biology 2e</a>, capítulos {lesson.chapters}.</p>
+    <p className="editorial-note">Referência didáctica: <a href="https://openstax.org/details/books/biology-2e">OpenStax Biology 2e</a>, capítulos {lesson.chapters}.</p>
     <section className="concept">
       <h2>{number}.5 · Avaliação de conclusão</h2>
-      <p>Cinco questões. Acerta pelo menos quatro (80%) para desbloquear o tópico seguinte.</p>
+      <p>Cinco questões. São necessários quatro acertos (80%) para aprovação.</p>
       <Link className="underline" to="/avaliacao/biologia/$topico" params={{topico:String(number)}}>Fazer avaliação do tópico {number}</Link>
     </section>
     {next && (reviewOpen || number <= completed) && <Link to="/biologia/$topico" params={{topico:next.id}}>Próxima aula · {next.title}</Link>}

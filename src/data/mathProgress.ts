@@ -1,3 +1,4 @@
+import { studyProgressionEnabled } from './studyAccess.server';
 import { createServerFn } from '@tanstack/react-start';
 import { useSession } from '@tanstack/react-start/server';
 import { z } from 'zod';
@@ -19,12 +20,12 @@ const reviewerCode = () => process.env['BOOKAR_REVIEW_CODE'];
 
 export const mathProgress = createServerFn({ method: 'GET' }).handler(async () => {
   if ((process.env['BOOKAR_SESSION_SECRET']?.length ?? 0) < 32) {
-    return { configured: false, reviewOpen: true, canReview: false, reviewer: false, completed: 0 };
+    return { enforced: false, configured: false, reviewOpen: true, canReview: false, reviewer: false, completed: 0 };
   }
   const { data } = await session();
   const canReview = (reviewerCode()?.length ?? 0) >= 32;
   const reviewer = canReview && (data.reviewerUntil ?? 0) > Date.now();
-  return { configured: true, reviewOpen: reviewer, canReview, reviewer, completed: data.completed ?? 0 };
+  return { enforced: studyProgressionEnabled(), configured: true, reviewOpen: reviewer || !studyProgressionEnabled(), canReview, reviewer, completed: data.completed ?? 0 };
 });
 
 export const changeMathProfile = createServerFn({ method: 'POST' })
@@ -56,7 +57,7 @@ export const startAssessment = createServerFn({ method: 'POST' })
   .handler(async ({ data }) => {
     const current = await session();
     const completed = current.data.completed ?? 0;
-    if (data.placement ? data.target <= completed + 1 : data.target > completed + 1) {
+    if (data.placement !== (studyProgressionEnabled() && data.target > completed + 1)) {
       throw new Error('O teste pedido não está disponível para o teu progresso.');
     }
     const picks: QuestionKey[] = [];
@@ -101,7 +102,7 @@ export const submitAssessment = createServerFn({ method: 'POST' })
     });
     const total = attempt.keys.length;
     const passed = correct * 5 >= total * 4;
-    const completed = Math.max(current.data.completed ?? 0, passed ? attempt.target - Number(attempt.placement) : 0);
+    const completed = Math.max(current.data.completed ?? 0, passed && studyProgressionEnabled() ? attempt.target - Number(attempt.placement) : 0);
     await current.update({ completed, attempt: null, previous: attempt.keys });
     return { correct, total, passed, results, completed };
   });

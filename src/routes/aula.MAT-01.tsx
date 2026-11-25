@@ -52,6 +52,6 @@ function PowersLesson() {
     <h2>1.6 · Controlo individual</h2>
     <ol><li>Simplifica 2⁷/2⁹.</li><li>Simplifica √108.</li><li>Encontra o domínio de √(5−x).</li><li>Resolve √(x+6)=x e verifica na equação inicial.</li></ol>
     <details><summary>Conferir após terminar o controlo</summary><p>1. 1/4. 2. 6√3. 3. x ≤ 5. 4. x = 3. Ao elevar ao quadrado aparecem 3 e −2. Só 3 verifica a igualdade inicial: √9 = 3.</p></details>
-    <MathAssessmentLink topic={1} heading="1.7"/><p className="editorial-note">MAT-01 · UAN · Medicina · 2026/2027 · Tópicos para o Exame de Acesso, página PDF 2 / impressa 1.</p>
+    <MathAssessmentLink topic={1} heading="1.7"/>
   </article>;
 }

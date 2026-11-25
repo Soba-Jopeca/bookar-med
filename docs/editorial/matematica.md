@@ -1,6 +1,6 @@
-# Matemática · UAN 2026/2027
+# Matemática
 
-Universidade Agostinho Neto · Ciências da Saúde · Medicina. Fonte de enquadramento: [Admissão UAN](https://www.uan.ao/sobre-uan/admissao). Proveniência de cada entrada: cópia fornecida de Tópicos para o Exame de Acesso, página PDF 2, página impressa 1, secção I. Os números abaixo indicam a ordem dos marcadores dessa página. A integralidade da cópia permanece por confirmar.
+Proveniência de cada entrada: cópia fornecida de Tópicos para o Exame de Acesso, página PDF 2, página impressa 1, secção I. Os números abaixo indicam a ordem dos marcadores dessa página. A integralidade da cópia permanece por confirmar.
 
 | Ordem didáctica | Aula ou unidade | Marcador | Evidência de aprendizagem | Visual original |
 |---|---|---|---|---|

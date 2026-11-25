@@ -1,6 +1,6 @@
 # BIO-01 · Organização celular · v0.1
 
-Rascunho para revisão independente. UAN · Ciências da Saúde · Medicina · 2026/2027. Item «Organização celular», Tópicos para o Exame de Acesso, PDF p. 2 / impressa p. 1. Referência didáctica: OpenStax Biology 2e, secções [4.2](https://openstax.org/books/biology-2e/pages/4-2-prokaryotic-cells) e [4.3](https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells).
+Rascunho para revisão independente. Item «Organização celular», Tópicos para o Exame de Acesso, PDF p. 2 / impressa p. 1. Referência didáctica: OpenStax Biology 2e, secções [4.2](https://openstax.org/books/biology-2e/pages/4-2-prokaryotic-cells) e [4.3](https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells).
 
 ## 1.1 · Antes de começar
 

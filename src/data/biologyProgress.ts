@@ -1,3 +1,4 @@
+import { studyProgressionEnabled } from './studyAccess.server';
 import { createServerFn } from '@tanstack/react-start';
 import { useSession } from '@tanstack/react-start/server';
 import { z } from 'zod';
@@ -20,7 +21,7 @@ async function biologySession() {
 
 export const biologyProgress = createServerFn({ method: 'GET' }).handler(async () => {
   const { configured, reviewOpen } = await mathProgress();
-  return { configured, reviewOpen, completed: configured ? (await biologySession()).data.completed ?? 0 : 0 };
+  return { configured, reviewOpen, enforced: studyProgressionEnabled(), completed: configured ? (await biologySession()).data.completed ?? 0 : 0 };
 });
 
 function shuffle<T>(items: T[]): T[] {
@@ -40,7 +41,7 @@ export const startBiologyAssessment = createServerFn({ method: 'POST' })
   .handler(async ({ data }) => {
     const current = await biologySession();
     const completed = current.data.completed ?? 0;
-    if (data.placement !== (data.target > completed + 1)) throw new Error('Modalidade indisponível.');
+    if (data.placement !== (studyProgressionEnabled() && data.target > completed + 1)) throw new Error('Modalidade indisponível.');
     const topics = data.placement ? Array.from({ length: data.target - 1 }, (_, i) => i + 1) : [data.target];
     const previous = current.data.attempt?.keys ?? current.data.previous ?? [];
     const keys = topics.flatMap(topic => {
@@ -76,7 +77,7 @@ export const submitBiologyAssessment = createServerFn({ method: 'POST' })
     });
     const total = attempt.keys.length;
     const passed = correct * 5 >= total * 4;
-    const completed = Math.max(current.data.completed ?? 0, passed ? attempt.target - Number(attempt.placement) : 0);
+    const completed = Math.max(current.data.completed ?? 0, passed && studyProgressionEnabled() ? attempt.target - Number(attempt.placement) : 0);
     await current.update({ completed, attempt: null, previous: attempt.keys });
     return { correct, total, passed, completed, results };
   });

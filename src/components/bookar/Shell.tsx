@@ -47,10 +47,10 @@ export function Shell({ children }: { children: ReactNode }) {
       <div className="user-profile"><span className="avatar">EC</span><div><strong>Estudante convidado</strong><small>Perfil de demonstração</small></div></div></div>
     </aside>
     <div className="main-shell"><div className="demo-ribbon">PROVA DE CONCEITO <span>·</span> Dados de demonstração <span>·</span> Conteúdo sujeito a revisão pedagógica</div>
-      <header className="topbar"><Button ref={menuRef} variant="ghost" size="icon" className="mobile-menu" aria-label="Abrir menu" aria-expanded={open} onClick={() => setOpen(true)}><Menu/></Button><span className="topbar-label"><Search size={17}/>O que vamos aprender hoje?</span><div className="topright"><span className="pill"><i className="status-dot"/>UAN · Base 2026/2027</span><GraduationCap size={21}/><span className="avatar">EC</span></div></header>
+      <header className="topbar"><Button ref={menuRef} variant="ghost" size="icon" className="mobile-menu" aria-label="Abrir menu" aria-expanded={open} onClick={() => setOpen(true)}><Menu/></Button><span className="topbar-label"><Search size={17}/>O que vamos aprender hoje?</span><div className="topright"><span className="pill"><i className="status-dot"/>Preparação para Medicina</span><GraduationCap size={21}/><span className="avatar">EC</span></div></header>
       <div className="quick-access"><Button asChild><Link to="/catalogo">Iniciar estudos <ArrowRight/></Link></Button><Button variant="outline" asChild><Link to="/modalidades">Modalidades</Link></Button><span>Um passo de cada vez, ao teu ritmo.</span></div>
       <main id="main-content" tabIndex={-1} className="content">{storageUnavailable && <p className="notice" role="status">O navegador não permite guardar progresso. Podes estudar, mas a retoma não estará disponível após fechar a página.</p>}{children}</main>
-      <footer className="brand-footer">Bookar Med By: Soba Academy - Mentoria do Soba<small>Preparação para o acesso à Medicina em Angola · UAN 2026/2027</small></footer>
+      <footer className="brand-footer">Bookar Med By: Soba Academy - Mentoria do Soba<small>Preparação para o acesso à Medicina em Angola</small></footer>
     </div>
   </div>;
 }

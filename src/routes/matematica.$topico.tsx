@@ -34,6 +34,6 @@ function Lesson() {
     </section>
     <h2>{n}.4 · A tua vez</h2><p>{lesson.question}</p>
     <details><summary>Conferir resolução</summary><p>{lesson.answer}</p></details>
-    <MathPractice topic={n} items={lesson.practice}/><MathAssessmentLink topic={n} heading={`${n}.7`}/><p className="editorial-note">UAN · Medicina · 2026/2027 · Tópicos para o Exame de Acesso, PDF p. 2 / impressa p. 1 · Marcadores {lesson.markers.join(', ')}.</p>
+    <MathPractice topic={n} items={lesson.practice}/><MathAssessmentLink topic={n} heading={`${n}.7`}/>
   </article>;
 }

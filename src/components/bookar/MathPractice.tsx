@@ -16,7 +16,7 @@ export function MathPractice({ topic, items }: { topic: number; items: Awaited<R
 }
 export function MathAssessmentLink({topic, heading}: { topic: number; heading: string }) {
   return <section className="concept"><h2>{heading} · Avaliação de conclusão</h2>
-    <p>Resolve cinco questões e acerta pelo menos quatro para fechar o tópico.</p>
+    <p>Resolve cinco questões. São necessários quatro acertos (80%) para aprovação.</p>
     <Link className="underline" to="/avaliacao/matematica/$topico" params={{ topico: String(topic) }}>Fazer avaliação do tópico {topic}</Link>
   </section>;
 }

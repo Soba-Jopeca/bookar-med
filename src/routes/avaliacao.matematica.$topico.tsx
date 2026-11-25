@@ -13,12 +13,12 @@ export const Route = createFileRoute('/avaliacao/matematica/$topico')({
 });
 
 function Assessment() {
-  const { topic, configured, completed } = Route.useLoaderData();
-  return <AssessmentForm key={topic} topic={topic} configured={configured} initialCompleted={completed}/>;
+  const { topic, configured, completed, enforced } = Route.useLoaderData();
+  return <AssessmentForm key={topic} topic={topic} enforced={enforced} configured={configured} initialCompleted={completed}/>;
 }
 
-function AssessmentForm({ topic, configured, initialCompleted }: {
-  topic: number; configured: boolean; initialCompleted: number;
+function AssessmentForm({ topic, configured, enforced, initialCompleted }: {
+  topic: number; enforced: boolean; configured: boolean; initialCompleted: number;
 }) {
   const [attempt, setAttempt] = useState<Awaited<ReturnType<typeof startAssessment>>>();
   const [result, setResult] = useState<Awaited<ReturnType<typeof submitAssessment>>>();
@@ -28,7 +28,7 @@ function AssessmentForm({ topic, configured, initialCompleted }: {
   useEffect(() => setReady(true), []);
   const [error, setError] = useState('');
   const completed = result?.completed ?? initialCompleted;
-  const placement = topic > completed + 1;
+  const placement = enforced && topic > completed + 1;
   const count = placement ? (Math.max(5, 2*(topic-1))) : 5;
   async function begin() {
     setBusy(true); setError('');
@@ -52,12 +52,13 @@ function AssessmentForm({ topic, configured, initialCompleted }: {
     <h1>{placement ? 'Teste de acesso directo' : 'Avaliação do tópico'} · {topic}</h1>
     {!configured ? <p className="notice">As avaliações estão a aguardar a configuração da sessão do site.</p> :
       <p>{placement ? 'O teste inclui perguntas de todos os tópicos anteriores.' : 'A avaliação verifica o que aprendeste neste tópico.'} Precisas de pelo menos 80%. {count} questões nesta modalidade.</p>}
+    {configured && !enforced && <p>Modo de preparação. A nota é apresentada ao terminar a avaliação.</p>}
     {error && <p role="alert">{error}</p>}
     {result && <section role="status" className="concept">
       <strong>{result.passed ? 'Aprovado' : 'Volta a tentar'} · {result.correct}/{result.total} ({(100*result.correct/result.total).toFixed(1)}%)</strong>
       <ul>{Object.entries(result.results).map(([n, score]) => <li key={n}>Tópico {n} · {score.correct}/{score.total}</li>)}</ul>
-      {result.passed && result.completed < 20 && <MathLessonLink topic={result.completed+1}>Abrir tópico {result.completed+1}</MathLessonLink>}
-      {result.passed && result.completed === 20 && <p>Trilha de Matemática concluída.</p>}
+      {enforced && result.passed && result.completed < 20 && <MathLessonLink topic={result.completed+1}>Abrir tópico {result.completed+1}</MathLessonLink>}
+      {enforced && result.passed && result.completed === 20 && <p>Trilha de Matemática concluída.</p>}
     </section>}
     {configured && <button className="underline" disabled={!ready || busy} onClick={begin}>{attempt || result ? 'Iniciar nova tentativa' : 'Começar teste'}</button>}
     {attempt && <form onSubmit={event => { event.preventDefault(); void submit(); }}>
