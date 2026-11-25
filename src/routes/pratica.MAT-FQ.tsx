@@ -1,10 +1,11 @@
+import { requireMathTopic } from '@/components/bookar/MathLessonLink';
 import { PracticeSet } from '@/components/bookar/Pilot';
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { ArrowLeft, Check, RotateCcw, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useActivity, useProgress } from '@/components/bookar/Progress';
 import { lesson, isCorrect, pageHead } from '@/data/bookar';
-export const Route = createFileRoute('/pratica/MAT-FQ')({ head: () => pageHead('Prática de função quadrática', 'Responde à pergunta demonstrativa sobre f(2), verifica o cálculo e relaciona o resultado com o vértice da parábola.'), component: Practice });
+export const Route = createFileRoute('/pratica/MAT-FQ')({ loader: () => requireMathTopic(6), head: () => pageHead('Prática de função quadrática', 'Responde à pergunta demonstrativa sobre f(2), verifica o cálculo e relaciona o resultado com o vértice da parábola.'), component: Practice });
 function Practice() {
   useActivity('practice');
   const { progress, answer } = useProgress();
