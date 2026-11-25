@@ -5,7 +5,7 @@ import { questionsFor } from './mathQuestions';
 
 type QuestionKey = { topic: number; variant: number; skill: 0 | 1 };
 type Attempt = { id: string; target: number; placement: boolean; keys: QuestionKey[] };
-type Progress = { completed?: number; attempt?: Attempt | null; previous?: QuestionKey[] };
+type Progress = { reviewerUntil?: number; completed?: number; attempt?: Attempt | null; previous?: QuestionKey[] };
 const topicSchema = z.number().int().min(1).max(20);
 
 async function session() {
@@ -15,10 +15,37 @@ async function session() {
     cookie: { httpOnly: true, sameSite: 'lax', secure: process.env['NODE_ENV'] === 'production' } });
 }
 
+const reviewerCode = () => process.env['BOOKAR_REVIEW_CODE'];
+
 export const mathProgress = createServerFn({ method: 'GET' }).handler(async () => {
-  if ((process.env['BOOKAR_SESSION_SECRET']?.length ?? 0) < 32) return { configured: false, completed: 0 };
-  return { configured: true, completed: (await session()).data.completed ?? 0 };
+  if ((process.env['BOOKAR_SESSION_SECRET']?.length ?? 0) < 32) {
+    return { configured: false, reviewOpen: true, canReview: false, reviewer: false, completed: 0 };
+  }
+  const { data } = await session();
+  const canReview = (reviewerCode()?.length ?? 0) >= 32;
+  const reviewer = canReview && (data.reviewerUntil ?? 0) > Date.now();
+  return { configured: true, reviewOpen: reviewer, canReview, reviewer, completed: data.completed ?? 0 };
 });
+
+export const changeMathProfile = createServerFn({ method: 'POST' })
+  .validator(z.object({ code: z.string().max(256).nullable() }))
+  .handler(async ({ data }) => {
+    const current = await session();
+    if (data.code === null) {
+      await current.update({ reviewerUntil: 0 });
+      return true;
+    }
+    const expected = reviewerCode();
+    if (!expected || expected.length < 32) return false;
+    const bytes = (value: string) => new TextEncoder().encode(value);
+    const digest = async (value: string) => new Uint8Array(await crypto.subtle.digest('SHA-256', bytes(value)));
+    const [actual, reference] = await Promise.all([digest(data.code), digest(expected)]);
+    let mismatch = 0;
+    for (let i = 0; i < reference.length; i++) mismatch |= actual[i]! ^ reference[i]!;
+    if (mismatch !== 0) return false;
+    await current.update({ reviewerUntil: Date.now() + 8 * 60 * 60 * 1000 });
+    return true;
+  });
 
 function randomIndex(size: number) {
   return crypto.getRandomValues(new Uint32Array(1))[0]! % size;

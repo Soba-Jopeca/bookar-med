@@ -10,7 +10,7 @@ export function MathLessonLink({ topic, children }: { topic: number; children: R
 
 export async function requireMathTopic(topic: number) {
   const status = await mathProgress();
-  if (topic > status.completed + 1) {
+  if (!status.reviewOpen && topic > status.completed + 1) {
     throw redirect({ to: '/avaliacao/matematica/$topico', params: { topico: String(topic) }, replace: true });
   }
   return status;
