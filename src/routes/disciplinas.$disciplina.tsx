@@ -29,7 +29,7 @@ function Subject() {
       <section className="topic-row" key={topic.id}>
         <div><span className="pill">{topic.id}</span><h2>{topic.title}</h2>
         <p>Fonte: programa UAN, página {topic.page} do PDF / impressa {topic.page - 1}.</p></div>
-        {topic.id === 'MAT-FQ' ? <Button asChild><Link to="/aula/MAT-FQ">Abrir aula piloto <ArrowRight/></Link></Button> : topic.id === 'MAT-01' ? <Button asChild><Link to="/aula/MAT-01">Abrir aula <ArrowRight/></Link></Button> : subject.id === 'matematica' ? <span className="pill">Consultar sequência acima</span> : <span className="pill">Aula em preparação</span>}
+        {topic.id === 'MAT-FQ' ? <Button asChild><Link to="/aula/MAT-FQ">Abrir aula piloto <ArrowRight/></Link></Button> : topic.id === 'MAT-01' ? <Button asChild><Link to="/aula/MAT-01">Abrir aula <ArrowRight/></Link></Button> : subject.id === 'matematica' ? <span className="pill">Consultar sequência acima</span> : subject.id === 'biologia' ? <Button asChild><Link to="/biologia/$topico" params={{topico:topic.id}}>Rever aula <ArrowRight/></Link></Button> : <span className="pill">Aula em preparação</span>}
       </section>
     ))}</div></>;
 }

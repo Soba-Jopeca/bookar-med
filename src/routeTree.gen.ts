@@ -14,6 +14,7 @@ import { Route as CatalogoRouteImport } from './routes/catalogo'
 import { Route as ModalidadesRouteImport } from './routes/modalidades'
 import { Route as AulaMAT01RouteImport } from './routes/aula.MAT-01'
 import { Route as AulaMATFQRouteImport } from './routes/aula.MAT-FQ'
+import { Route as BiologiaTopicoRouteImport } from './routes/biologia.$topico'
 import { Route as DisciplinasDisciplinaRouteImport } from './routes/disciplinas.$disciplina'
 import { Route as MatematicaTopicoRouteImport } from './routes/matematica.$topico'
 import { Route as PraticaMATFQRouteImport } from './routes/pratica.MAT-FQ'
@@ -44,6 +45,11 @@ const AulaMATFQRoute = AulaMATFQRouteImport.update({
   path: '/aula/MAT-FQ',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BiologiaTopicoRoute = BiologiaTopicoRouteImport.update({
+  id: '/biologia/$topico',
+  path: '/biologia/$topico',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DisciplinasDisciplinaRoute = DisciplinasDisciplinaRouteImport.update({
   id: '/disciplinas/$disciplina',
   path: '/disciplinas/$disciplina',
@@ -72,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/modalidades': typeof ModalidadesRoute
   '/aula/MAT-01': typeof AulaMAT01Route
   '/aula/MAT-FQ': typeof AulaMATFQRoute
+  '/biologia/$topico': typeof BiologiaTopicoRoute
   '/disciplinas/$disciplina': typeof DisciplinasDisciplinaRoute
   '/matematica/$topico': typeof MatematicaTopicoRoute
   '/pratica/MAT-FQ': typeof PraticaMATFQRoute
@@ -83,6 +90,7 @@ export interface FileRoutesByTo {
   '/modalidades': typeof ModalidadesRoute
   '/aula/MAT-01': typeof AulaMAT01Route
   '/aula/MAT-FQ': typeof AulaMATFQRoute
+  '/biologia/$topico': typeof BiologiaTopicoRoute
   '/disciplinas/$disciplina': typeof DisciplinasDisciplinaRoute
   '/matematica/$topico': typeof MatematicaTopicoRoute
   '/pratica/MAT-FQ': typeof PraticaMATFQRoute
@@ -95,6 +103,7 @@ export interface FileRoutesById {
   '/modalidades': typeof ModalidadesRoute
   '/aula/MAT-01': typeof AulaMAT01Route
   '/aula/MAT-FQ': typeof AulaMATFQRoute
+  '/biologia/$topico': typeof BiologiaTopicoRoute
   '/disciplinas/$disciplina': typeof DisciplinasDisciplinaRoute
   '/matematica/$topico': typeof MatematicaTopicoRoute
   '/pratica/MAT-FQ': typeof PraticaMATFQRoute
@@ -108,6 +117,7 @@ export interface FileRouteTypes {
     | '/modalidades'
     | '/aula/MAT-01'
     | '/aula/MAT-FQ'
+    | '/biologia/$topico'
     | '/disciplinas/$disciplina'
     | '/matematica/$topico'
     | '/pratica/MAT-FQ'
@@ -119,6 +129,7 @@ export interface FileRouteTypes {
     | '/modalidades'
     | '/aula/MAT-01'
     | '/aula/MAT-FQ'
+    | '/biologia/$topico'
     | '/disciplinas/$disciplina'
     | '/matematica/$topico'
     | '/pratica/MAT-FQ'
@@ -130,6 +141,7 @@ export interface FileRouteTypes {
     | '/modalidades'
     | '/aula/MAT-01'
     | '/aula/MAT-FQ'
+    | '/biologia/$topico'
     | '/disciplinas/$disciplina'
     | '/matematica/$topico'
     | '/pratica/MAT-FQ'
@@ -142,6 +154,7 @@ export interface RootRouteChildren {
   ModalidadesRoute: typeof ModalidadesRoute
   AulaMAT01Route: typeof AulaMAT01Route
   AulaMATFQRoute: typeof AulaMATFQRoute
+  BiologiaTopicoRoute: typeof BiologiaTopicoRoute
   DisciplinasDisciplinaRoute: typeof DisciplinasDisciplinaRoute
   MatematicaTopicoRoute: typeof MatematicaTopicoRoute
   PraticaMATFQRoute: typeof PraticaMATFQRoute
@@ -185,6 +198,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AulaMATFQRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/biologia/$topico': {
+      id: '/biologia/$topico'
+      path: '/biologia/$topico'
+      fullPath: '/biologia/$topico'
+      preLoaderRoute: typeof BiologiaTopicoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/disciplinas/$disciplina': {
       id: '/disciplinas/$disciplina'
       path: '/disciplinas/$disciplina'
@@ -222,6 +242,7 @@ const rootRouteChildren: RootRouteChildren = {
   ModalidadesRoute: ModalidadesRoute,
   AulaMAT01Route: AulaMAT01Route,
   AulaMATFQRoute: AulaMATFQRoute,
+  BiologiaTopicoRoute: BiologiaTopicoRoute,
   DisciplinasDisciplinaRoute: DisciplinasDisciplinaRoute,
   MatematicaTopicoRoute: MatematicaTopicoRoute,
   PraticaMATFQRoute: PraticaMATFQRoute,
