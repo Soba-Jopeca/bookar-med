@@ -1,3 +1,4 @@
+import { biologyProgress } from '@/data/biologyProgress';
 import { MathProfile } from '@/components/bookar/MathProfile';
 import { mathProgress } from '@/data/mathProgress';
 import { MathLessonLink } from '@/components/bookar/MathLessonLink';
@@ -8,7 +9,7 @@ import { ArrowRight, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { subjects, pageHead } from '@/data/bookar';
 export const Route = createFileRoute('/disciplinas/$disciplina')({
-  loader: async ({ params }) => { const subject = subjects.find(s => s.id === params.disciplina); if (!subject) throw notFound(); return { ...subject, progress: subject.id === "matematica" ? await mathProgress() : null }; },
+  loader: async ({ params }) => { const subject = subjects.find(s => s.id === params.disciplina); if (!subject) throw notFound(); return { ...subject, biology: subject.id === "biologia" ? await biologyProgress() : null, progress: subject.id === "matematica" ? await mathProgress() : null }; },
   head: ({ loaderData }) => pageHead(loaderData?.name ?? 'Disciplina indisponível', `Estuda ${loaderData?.name ?? 'as disciplinas'} com o Bookar Med, preparação para o acesso à Medicina em Angola.`), component: Subject,
 });
 function Subject() {
@@ -25,11 +26,13 @@ function Subject() {
 
     </ol></section>}
     <h2>Programa de referência</h2>
-    <div className="topic-list">{curriculum[subject.id]?.map(topic => (
+    <div className="topic-list">{curriculum[subject.id]?.map((topic, index) => (
       <section className="topic-row" key={topic.id}>
         <div><span className="pill">{topic.id}</span><h2>{topic.title}</h2>
         <p>Fonte: programa UAN, página {topic.page} do PDF / impressa {topic.page - 1}.</p></div>
-        {topic.id === 'MAT-FQ' ? <Button asChild><Link to="/aula/MAT-FQ">Abrir aula piloto <ArrowRight/></Link></Button> : topic.id === 'MAT-01' ? <Button asChild><Link to="/aula/MAT-01">Abrir aula <ArrowRight/></Link></Button> : subject.id === 'matematica' ? <span className="pill">Consultar sequência acima</span> : subject.id === 'biologia' ? <Button asChild><Link to="/biologia/$topico" params={{topico:topic.id}}>Rever aula <ArrowRight/></Link></Button> : <span className="pill">Aula em preparação</span>}
+        {topic.id === 'MAT-FQ' ? <Button asChild><Link to="/aula/MAT-FQ">Abrir aula piloto <ArrowRight/></Link></Button> : topic.id === 'MAT-01' ? <Button asChild><Link to="/aula/MAT-01">Abrir aula <ArrowRight/></Link></Button> : subject.id === 'matematica' ? <span className="pill">Consultar sequência acima</span> : subject.biology ? <Button asChild>{subject.biology.reviewOpen || index <= subject.biology.completed
+          ? <Link to="/biologia/$topico" params={{topico:topic.id}}>{index < subject.biology.completed ? 'Rever aula concluída' : 'Abrir aula'} <ArrowRight/></Link>
+          : <Link to="/avaliacao/biologia/$topico" params={{topico:String(index+1)}}>Teste de acesso <ArrowRight/></Link>}</Button> : <span className="pill">Aula em preparação</span>}
       </section>
     ))}</div></>;
 }

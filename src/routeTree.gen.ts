@@ -18,6 +18,7 @@ import { Route as BiologiaTopicoRouteImport } from './routes/biologia.$topico'
 import { Route as DisciplinasDisciplinaRouteImport } from './routes/disciplinas.$disciplina'
 import { Route as MatematicaTopicoRouteImport } from './routes/matematica.$topico'
 import { Route as PraticaMATFQRouteImport } from './routes/pratica.MAT-FQ'
+import { Route as AvaliacaoBiologiaTopicoRouteImport } from './routes/avaliacao.biologia.$topico'
 import { Route as AvaliacaoMatematicaTopicoRouteImport } from './routes/avaliacao.matematica.$topico'
 
 const IndexRoute = IndexRouteImport.update({
@@ -65,6 +66,11 @@ const PraticaMATFQRoute = PraticaMATFQRouteImport.update({
   path: '/pratica/MAT-FQ',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AvaliacaoBiologiaTopicoRoute = AvaliacaoBiologiaTopicoRouteImport.update({
+  id: '/avaliacao/biologia/$topico',
+  path: '/avaliacao/biologia/$topico',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AvaliacaoMatematicaTopicoRoute =
   AvaliacaoMatematicaTopicoRouteImport.update({
     id: '/avaliacao/matematica/$topico',
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/disciplinas/$disciplina': typeof DisciplinasDisciplinaRoute
   '/matematica/$topico': typeof MatematicaTopicoRoute
   '/pratica/MAT-FQ': typeof PraticaMATFQRoute
+  '/avaliacao/biologia/$topico': typeof AvaliacaoBiologiaTopicoRoute
   '/avaliacao/matematica/$topico': typeof AvaliacaoMatematicaTopicoRoute
 }
 export interface FileRoutesByTo {
@@ -94,6 +101,7 @@ export interface FileRoutesByTo {
   '/disciplinas/$disciplina': typeof DisciplinasDisciplinaRoute
   '/matematica/$topico': typeof MatematicaTopicoRoute
   '/pratica/MAT-FQ': typeof PraticaMATFQRoute
+  '/avaliacao/biologia/$topico': typeof AvaliacaoBiologiaTopicoRoute
   '/avaliacao/matematica/$topico': typeof AvaliacaoMatematicaTopicoRoute
 }
 export interface FileRoutesById {
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   '/disciplinas/$disciplina': typeof DisciplinasDisciplinaRoute
   '/matematica/$topico': typeof MatematicaTopicoRoute
   '/pratica/MAT-FQ': typeof PraticaMATFQRoute
+  '/avaliacao/biologia/$topico': typeof AvaliacaoBiologiaTopicoRoute
   '/avaliacao/matematica/$topico': typeof AvaliacaoMatematicaTopicoRoute
 }
 export interface FileRouteTypes {
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/disciplinas/$disciplina'
     | '/matematica/$topico'
     | '/pratica/MAT-FQ'
+    | '/avaliacao/biologia/$topico'
     | '/avaliacao/matematica/$topico'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/disciplinas/$disciplina'
     | '/matematica/$topico'
     | '/pratica/MAT-FQ'
+    | '/avaliacao/biologia/$topico'
     | '/avaliacao/matematica/$topico'
   id:
     | '__root__'
@@ -145,6 +156,7 @@ export interface FileRouteTypes {
     | '/disciplinas/$disciplina'
     | '/matematica/$topico'
     | '/pratica/MAT-FQ'
+    | '/avaliacao/biologia/$topico'
     | '/avaliacao/matematica/$topico'
   fileRoutesById: FileRoutesById
 }
@@ -158,6 +170,7 @@ export interface RootRouteChildren {
   DisciplinasDisciplinaRoute: typeof DisciplinasDisciplinaRoute
   MatematicaTopicoRoute: typeof MatematicaTopicoRoute
   PraticaMATFQRoute: typeof PraticaMATFQRoute
+  AvaliacaoBiologiaTopicoRoute: typeof AvaliacaoBiologiaTopicoRoute
   AvaliacaoMatematicaTopicoRoute: typeof AvaliacaoMatematicaTopicoRoute
 }
 
@@ -226,6 +239,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PraticaMATFQRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/avaliacao/biologia/$topico': {
+      id: '/avaliacao/biologia/$topico'
+      path: '/avaliacao/biologia/$topico'
+      fullPath: '/avaliacao/biologia/$topico'
+      preLoaderRoute: typeof AvaliacaoBiologiaTopicoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/avaliacao/matematica/$topico': {
       id: '/avaliacao/matematica/$topico'
       path: '/avaliacao/matematica/$topico'
@@ -246,6 +266,7 @@ const rootRouteChildren: RootRouteChildren = {
   DisciplinasDisciplinaRoute: DisciplinasDisciplinaRoute,
   MatematicaTopicoRoute: MatematicaTopicoRoute,
   PraticaMATFQRoute: PraticaMATFQRoute,
+  AvaliacaoBiologiaTopicoRoute: AvaliacaoBiologiaTopicoRoute,
   AvaliacaoMatematicaTopicoRoute: AvaliacaoMatematicaTopicoRoute,
 }
 export const routeTree = rootRouteImport
