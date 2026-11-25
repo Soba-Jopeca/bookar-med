@@ -15,6 +15,7 @@ import { Route as ModalidadesRouteImport } from './routes/modalidades'
 import { Route as AulaMAT01RouteImport } from './routes/aula.MAT-01'
 import { Route as AulaMATFQRouteImport } from './routes/aula.MAT-FQ'
 import { Route as DisciplinasDisciplinaRouteImport } from './routes/disciplinas.$disciplina'
+import { Route as MatematicaTopicoRouteImport } from './routes/matematica.$topico'
 import { Route as PraticaMATFQRouteImport } from './routes/pratica.MAT-FQ'
 
 const IndexRoute = IndexRouteImport.update({
@@ -47,6 +48,11 @@ const DisciplinasDisciplinaRoute = DisciplinasDisciplinaRouteImport.update({
   path: '/disciplinas/$disciplina',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MatematicaTopicoRoute = MatematicaTopicoRouteImport.update({
+  id: '/matematica/$topico',
+  path: '/matematica/$topico',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PraticaMATFQRoute = PraticaMATFQRouteImport.update({
   id: '/pratica/MAT-FQ',
   path: '/pratica/MAT-FQ',
@@ -60,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/aula/MAT-01': typeof AulaMAT01Route
   '/aula/MAT-FQ': typeof AulaMATFQRoute
   '/disciplinas/$disciplina': typeof DisciplinasDisciplinaRoute
+  '/matematica/$topico': typeof MatematicaTopicoRoute
   '/pratica/MAT-FQ': typeof PraticaMATFQRoute
 }
 export interface FileRoutesByTo {
@@ -69,6 +76,7 @@ export interface FileRoutesByTo {
   '/aula/MAT-01': typeof AulaMAT01Route
   '/aula/MAT-FQ': typeof AulaMATFQRoute
   '/disciplinas/$disciplina': typeof DisciplinasDisciplinaRoute
+  '/matematica/$topico': typeof MatematicaTopicoRoute
   '/pratica/MAT-FQ': typeof PraticaMATFQRoute
 }
 export interface FileRoutesById {
@@ -79,6 +87,7 @@ export interface FileRoutesById {
   '/aula/MAT-01': typeof AulaMAT01Route
   '/aula/MAT-FQ': typeof AulaMATFQRoute
   '/disciplinas/$disciplina': typeof DisciplinasDisciplinaRoute
+  '/matematica/$topico': typeof MatematicaTopicoRoute
   '/pratica/MAT-FQ': typeof PraticaMATFQRoute
 }
 export interface FileRouteTypes {
@@ -90,6 +99,7 @@ export interface FileRouteTypes {
     | '/aula/MAT-01'
     | '/aula/MAT-FQ'
     | '/disciplinas/$disciplina'
+    | '/matematica/$topico'
     | '/pratica/MAT-FQ'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -99,6 +109,7 @@ export interface FileRouteTypes {
     | '/aula/MAT-01'
     | '/aula/MAT-FQ'
     | '/disciplinas/$disciplina'
+    | '/matematica/$topico'
     | '/pratica/MAT-FQ'
   id:
     | '__root__'
@@ -108,6 +119,7 @@ export interface FileRouteTypes {
     | '/aula/MAT-01'
     | '/aula/MAT-FQ'
     | '/disciplinas/$disciplina'
+    | '/matematica/$topico'
     | '/pratica/MAT-FQ'
   fileRoutesById: FileRoutesById
 }
@@ -118,6 +130,7 @@ export interface RootRouteChildren {
   AulaMAT01Route: typeof AulaMAT01Route
   AulaMATFQRoute: typeof AulaMATFQRoute
   DisciplinasDisciplinaRoute: typeof DisciplinasDisciplinaRoute
+  MatematicaTopicoRoute: typeof MatematicaTopicoRoute
   PraticaMATFQRoute: typeof PraticaMATFQRoute
 }
 
@@ -165,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DisciplinasDisciplinaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/matematica/$topico': {
+      id: '/matematica/$topico'
+      path: '/matematica/$topico'
+      fullPath: '/matematica/$topico'
+      preLoaderRoute: typeof MatematicaTopicoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pratica/MAT-FQ': {
       id: '/pratica/MAT-FQ'
       path: '/pratica/MAT-FQ'
@@ -182,6 +202,7 @@ const rootRouteChildren: RootRouteChildren = {
   AulaMAT01Route: AulaMAT01Route,
   AulaMATFQRoute: AulaMATFQRoute,
   DisciplinasDisciplinaRoute: DisciplinasDisciplinaRoute,
+  MatematicaTopicoRoute: MatematicaTopicoRoute,
   PraticaMATFQRoute: PraticaMATFQRoute,
 }
 export const routeTree = rootRouteImport
