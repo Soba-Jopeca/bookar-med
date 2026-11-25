@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CatalogoRouteImport } from './routes/catalogo'
+import { Route as ModalidadesRouteImport } from './routes/modalidades'
+import { Route as AulaMATFQRouteImport } from './routes/aula.MAT-FQ'
+import { Route as DisciplinasDisciplinaRouteImport } from './routes/disciplinas.$disciplina'
+import { Route as PraticaMATFQRouteImport } from './routes/pratica.MAT-FQ'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogoRoute = CatalogoRouteImport.update({
+  id: '/catalogo',
+  path: '/catalogo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ModalidadesRoute = ModalidadesRouteImport.update({
+  id: '/modalidades',
+  path: '/modalidades',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AulaMATFQRoute = AulaMATFQRouteImport.update({
+  id: '/aula/MAT-FQ',
+  path: '/aula/MAT-FQ',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DisciplinasDisciplinaRoute = DisciplinasDisciplinaRouteImport.update({
+  id: '/disciplinas/$disciplina',
+  path: '/disciplinas/$disciplina',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PraticaMATFQRoute = PraticaMATFQRouteImport.update({
+  id: '/pratica/MAT-FQ',
+  path: '/pratica/MAT-FQ',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/catalogo': typeof CatalogoRoute
+  '/modalidades': typeof ModalidadesRoute
+  '/aula/MAT-FQ': typeof AulaMATFQRoute
+  '/disciplinas/$disciplina': typeof DisciplinasDisciplinaRoute
+  '/pratica/MAT-FQ': typeof PraticaMATFQRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/catalogo': typeof CatalogoRoute
+  '/modalidades': typeof ModalidadesRoute
+  '/aula/MAT-FQ': typeof AulaMATFQRoute
+  '/disciplinas/$disciplina': typeof DisciplinasDisciplinaRoute
+  '/pratica/MAT-FQ': typeof PraticaMATFQRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/catalogo': typeof CatalogoRoute
+  '/modalidades': typeof ModalidadesRoute
+  '/aula/MAT-FQ': typeof AulaMATFQRoute
+  '/disciplinas/$disciplina': typeof DisciplinasDisciplinaRoute
+  '/pratica/MAT-FQ': typeof PraticaMATFQRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/catalogo'
+    | '/modalidades'
+    | '/aula/MAT-FQ'
+    | '/disciplinas/$disciplina'
+    | '/pratica/MAT-FQ'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/catalogo'
+    | '/modalidades'
+    | '/aula/MAT-FQ'
+    | '/disciplinas/$disciplina'
+    | '/pratica/MAT-FQ'
+  id:
+    | '__root__'
+    | '/'
+    | '/catalogo'
+    | '/modalidades'
+    | '/aula/MAT-FQ'
+    | '/disciplinas/$disciplina'
+    | '/pratica/MAT-FQ'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CatalogoRoute: typeof CatalogoRoute
+  ModalidadesRoute: typeof ModalidadesRoute
+  AulaMATFQRoute: typeof AulaMATFQRoute
+  DisciplinasDisciplinaRoute: typeof DisciplinasDisciplinaRoute
+  PraticaMATFQRoute: typeof PraticaMATFQRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo': {
+      id: '/catalogo'
+      path: '/catalogo'
+      fullPath: '/catalogo'
+      preLoaderRoute: typeof CatalogoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/modalidades': {
+      id: '/modalidades'
+      path: '/modalidades'
+      fullPath: '/modalidades'
+      preLoaderRoute: typeof ModalidadesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aula/MAT-FQ': {
+      id: '/aula/MAT-FQ'
+      path: '/aula/MAT-FQ'
+      fullPath: '/aula/MAT-FQ'
+      preLoaderRoute: typeof AulaMATFQRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/disciplinas/$disciplina': {
+      id: '/disciplinas/$disciplina'
+      path: '/disciplinas/$disciplina'
+      fullPath: '/disciplinas/$disciplina'
+      preLoaderRoute: typeof DisciplinasDisciplinaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pratica/MAT-FQ': {
+      id: '/pratica/MAT-FQ'
+      path: '/pratica/MAT-FQ'
+      fullPath: '/pratica/MAT-FQ'
+      preLoaderRoute: typeof PraticaMATFQRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CatalogoRoute: CatalogoRoute,
+  ModalidadesRoute: ModalidadesRoute,
+  AulaMATFQRoute: AulaMATFQRoute,
+  DisciplinasDisciplinaRoute: DisciplinasDisciplinaRoute,
+  PraticaMATFQRoute: PraticaMATFQRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

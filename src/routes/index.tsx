@@ -1,23 +1,14 @@
-import { createFileRoute } from "@tanstack/react-router";
-
-// The home route ships no og:image, so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { ArrowRight, ArrowUpRight, BookOpen, CheckCircle2, Circle, GraduationCap, NotebookPen, Sparkles, Sun, Timer } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { HeroArt } from '@/components/bookar/HeroArt';
+import { SubjectCards } from '@/components/bookar/SubjectCards';
+import { useProgress } from '@/components/bookar/Progress';
+import { pageHead } from '@/data/bookar';
+export const Route = createFileRoute('/')({ head: () => pageHead('O teu futuro começa aqui', 'Bookar Med da Soba Academy - Mentoria do Soba. Preparação para o acesso à Medicina em Angola, Ciências da Saúde da UAN 2026/2027.'), component: Index });
 function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+  const { progress } = useProgress();
+  const steps = Number(progress?.lessonVisited ?? false) + Number(progress?.checked ?? false);
+  const resumeTo = progress?.activity === 'practice' ? '/pratica/MAT-FQ' : '/aula/MAT-FQ';
+  return <><header className="page-heading"><div className="eyebrow">Aprender. Praticar. Evoluir.</div><h1>Olá, futuro médico.<Sun size={25} className="greeting-sun"/></h1><p>Cada sessão de estudo é um passo em direcção ao teu futuro.</p></header><div className="home-grid"><div><section className="hero"><div className="hero-copy"><span className="hero-pill">UM SONHO. UM PLANO. UM DIA DE CADA VEZ.</span><h2>O próximo capítulo<br/>da tua vida <em>começa aqui.</em></h2><p>Constrói uma base sólida para o acesso à Medicina, com estudo guiado e prática com propósito.</p><div className="hero-actions"><Button variant="lime" asChild><Link to={progress ? resumeTo : '/catalogo'}>{progress ? 'Continuar estudos' : 'Iniciar estudos'}<ArrowRight/></Link></Button></div></div><HeroArt/></section><div className="stats"><div className="stat"><span className="stat-icon"><BookOpen size={18}/></span><div><strong>4</strong><small>Disciplinas de estudo</small></div></div><div className="stat"><span className="stat-icon"><NotebookPen size={18}/></span><div><strong>1</strong><small>Aula demonstrativa</small></div></div><div className="stat"><span className="stat-icon"><Sparkles size={18}/></span><div><strong>1</strong><small>Prática disponível</small></div></div><div className="stat"><span className="stat-icon"><GraduationCap size={18}/></span><div><strong>UAN</strong><small>Edição 2026/2027</small></div></div></div><div className="section-head"><div><h2>As tuas trilhas de estudo</h2><p>Quatro disciplinas. Um objectivo em comum.</p></div><Link to="/catalogo" className="text-link">Explorar todas<ArrowUpRight size={14}/></Link></div><SubjectCards/><section className="banner"><span className="subject-tile"><Timer size={23}/></span><div><h3>Um passo além da aula.</h3><p>Conhece as modalidades de aprendizagem.</p></div><Button asChild variant="outline"><Link to="/modalidades">Explorar<ArrowRight/></Link></Button></section></div><aside className="aside-stack"><section className="daily"><div className="daily-title"><h3>O teu primeiro passo</h3><Sparkles size={18}/></div><p>Consistência vale mais que pressa.</p><div className={`goal-ring ${steps === 1 ? 'step-one' : steps === 2 ? 'step-two' : ''}`}><strong>{steps}/2</strong><small>etapas da demonstração</small></div><div className="checkline">{progress?.lessonVisited ? <CheckCircle2 size={16}/> : <Circle size={16}/>}<span>Consultar a aula MAT-FQ</span></div><div className="checkline">{progress?.checked ? <CheckCircle2 size={16}/> : <Circle size={16}/>}<span>Responder à prática</span></div><Button variant="secondary" asChild><Link to={progress ? resumeTo : '/catalogo'}>{progress ? 'Retomar actividade' : 'Vamos a isso'}<ArrowRight/></Link></Button></section><section className="daily"><div className="daily-title"><h3>O teu ritmo de estudo</h3><BookOpen size={17}/></div><div className="last-activity"><span className="subject-tile"><NotebookPen size={20}/></span><div><strong>{progress ? 'Função quadrática' : 'Um novo começo'}</strong><small>{progress ? (progress.activity === 'practice' ? 'Última actividade: prática' : 'Última actividade: aula') : 'A tua primeira aula espera por ti.'}</small></div></div><p>{progress ? 'Progresso demonstrativo guardado neste navegador.' : 'Cada grande percurso começa com uma aula.'}</p></section><blockquote className="quote">“O futuro que imaginas constrói-se nas escolhas de hoje.”<small>UM LEMBRETE BOOKAR MED</small></blockquote></aside></div></>;
 }

@@ -12,6 +12,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { ProgressProvider } from '@/components/bookar/Progress';
+import { Shell } from '@/components/bookar/Shell';
 
 function NotFoundComponent() {
   return (
@@ -81,14 +83,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Bookar Med · Soba Academy" },
+      { name: "description", content: "Preparação para o acesso à Medicina em Angola." },
+      { name: "author", content: "Soba Academy - Mentoria do Soba" },
+      { property: "og:title", content: "Bookar Med · Soba Academy" },
+      { property: "og:description", content: "Preparação para o acesso à Medicina em Angola." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -106,7 +107,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-AO">
       <head>
         <HeadContent />
       </head>
@@ -124,7 +125,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <ProgressProvider><Shell><Outlet /></Shell></ProgressProvider>
     </QueryClientProvider>
   );
 }

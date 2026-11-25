@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Application architecture
+- Keep demonstration content and mathematical rules in browser-safe data modules, separate from views, to support a future data source.
+- Keep prototype progress in a versioned, validated localStorage record through a shared React provider; never store personal data or credentials there.
+- Use file-based TanStack routes for every activity so refresh and direct links work.
+- Future simulated-exam grading must run behind a server-only boundary; the prototype exposes only local illustrative practice.
