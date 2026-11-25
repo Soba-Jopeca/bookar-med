@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CatalogoRouteImport } from './routes/catalogo'
 import { Route as ModalidadesRouteImport } from './routes/modalidades'
+import { Route as AulaMAT01RouteImport } from './routes/aula.MAT-01'
 import { Route as AulaMATFQRouteImport } from './routes/aula.MAT-FQ'
 import { Route as DisciplinasDisciplinaRouteImport } from './routes/disciplinas.$disciplina'
 import { Route as PraticaMATFQRouteImport } from './routes/pratica.MAT-FQ'
@@ -29,6 +30,11 @@ const CatalogoRoute = CatalogoRouteImport.update({
 const ModalidadesRoute = ModalidadesRouteImport.update({
   id: '/modalidades',
   path: '/modalidades',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AulaMAT01Route = AulaMAT01RouteImport.update({
+  id: '/aula/MAT-01',
+  path: '/aula/MAT-01',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AulaMATFQRoute = AulaMATFQRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/catalogo': typeof CatalogoRoute
   '/modalidades': typeof ModalidadesRoute
+  '/aula/MAT-01': typeof AulaMAT01Route
   '/aula/MAT-FQ': typeof AulaMATFQRoute
   '/disciplinas/$disciplina': typeof DisciplinasDisciplinaRoute
   '/pratica/MAT-FQ': typeof PraticaMATFQRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/catalogo': typeof CatalogoRoute
   '/modalidades': typeof ModalidadesRoute
+  '/aula/MAT-01': typeof AulaMAT01Route
   '/aula/MAT-FQ': typeof AulaMATFQRoute
   '/disciplinas/$disciplina': typeof DisciplinasDisciplinaRoute
   '/pratica/MAT-FQ': typeof PraticaMATFQRoute
@@ -68,6 +76,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/catalogo': typeof CatalogoRoute
   '/modalidades': typeof ModalidadesRoute
+  '/aula/MAT-01': typeof AulaMAT01Route
   '/aula/MAT-FQ': typeof AulaMATFQRoute
   '/disciplinas/$disciplina': typeof DisciplinasDisciplinaRoute
   '/pratica/MAT-FQ': typeof PraticaMATFQRoute
@@ -78,6 +87,7 @@ export interface FileRouteTypes {
     | '/'
     | '/catalogo'
     | '/modalidades'
+    | '/aula/MAT-01'
     | '/aula/MAT-FQ'
     | '/disciplinas/$disciplina'
     | '/pratica/MAT-FQ'
@@ -86,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/catalogo'
     | '/modalidades'
+    | '/aula/MAT-01'
     | '/aula/MAT-FQ'
     | '/disciplinas/$disciplina'
     | '/pratica/MAT-FQ'
@@ -94,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/catalogo'
     | '/modalidades'
+    | '/aula/MAT-01'
     | '/aula/MAT-FQ'
     | '/disciplinas/$disciplina'
     | '/pratica/MAT-FQ'
@@ -103,6 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CatalogoRoute: typeof CatalogoRoute
   ModalidadesRoute: typeof ModalidadesRoute
+  AulaMAT01Route: typeof AulaMAT01Route
   AulaMATFQRoute: typeof AulaMATFQRoute
   DisciplinasDisciplinaRoute: typeof DisciplinasDisciplinaRoute
   PraticaMATFQRoute: typeof PraticaMATFQRoute
@@ -129,6 +142,13 @@ declare module '@tanstack/react-router' {
       path: '/modalidades'
       fullPath: '/modalidades'
       preLoaderRoute: typeof ModalidadesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aula/MAT-01': {
+      id: '/aula/MAT-01'
+      path: '/aula/MAT-01'
+      fullPath: '/aula/MAT-01'
+      preLoaderRoute: typeof AulaMAT01RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/aula/MAT-FQ': {
@@ -159,6 +179,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CatalogoRoute: CatalogoRoute,
   ModalidadesRoute: ModalidadesRoute,
+  AulaMAT01Route: AulaMAT01Route,
   AulaMATFQRoute: AulaMATFQRoute,
   DisciplinasDisciplinaRoute: DisciplinasDisciplinaRoute,
   PraticaMATFQRoute: PraticaMATFQRoute,
