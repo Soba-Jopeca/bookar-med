@@ -15,7 +15,7 @@ export function Parabola() {
     <line x1={px(2)} x2={px(2)} y1="28" y2="309" className="graph-symmetry"/><text x="197" y="39" className="graph-caption">x = 2</text>
     <polyline points={points} clipPath="url(#plot-area)" className="graph-curve"/>
     <circle cx={px(1)} cy={py(0)} r="5" className="graph-point"/><circle cx={px(3)} cy={py(0)} r="5" className="graph-point"/>
-    <text x="69" y="244" className="graph-caption">(1, 0)</text><text x="267" y="244" className="graph-caption">(3, 0)</text>
+    <text x="69" y="244" className="graph-caption">(1, 0)</text><text x="293" y="249" className="graph-caption">(3, 0)</text>
     <circle cx={px(2)} cy={py(-1)} r="6" className="graph-vertex"/><text x="199" y="310" className="graph-caption">V (2, −1)</text>
   </svg><figcaption>A parábola abre para cima e cruza o eixo x em (1, 0) e (3, 0). O ponto mais baixo é o vértice (2, −1). A linha tracejada x = 2 divide o gráfico em duas partes simétricas.</figcaption></figure>;
 }

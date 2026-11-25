@@ -40,8 +40,8 @@ export function Shell({ children }: { children: ReactNode }) {
       <div className="nav-label">Aprender & avaliar</div>
       <nav className="side-nav">
         <Link to="/pratica/MAT-FQ" className={pathname.startsWith('/pratica') ? 'active' : ''}><NotebookPen size={19}/>Prática<span className="nav-count">1</span></Link>
-        <Link to="/modalidades" className={pathname === '/modalidades' ? 'active' : ''}><ClipboardCheck size={19}/>Controlo<span className="nav-soon">Em breve</span></Link>
-        <Link to="/modalidades"><Timer size={19}/>Simulado<span className="nav-soon">Em breve</span></Link>
+        <Link to="/modalidades" className={pathname === '/modalidades' ? 'active' : ''}><ClipboardCheck size={19}/>Controlo</Link>
+        <Link to="/modalidades"><Timer size={19}/>Simulado</Link>
       </nav>
       <div className="sidebar-bottom"><div className="side-note"><Sprout size={22}/><strong>Pequenos passos.<br/>Grandes futuros.</strong><p>Um tópico de cada vez, mais perto do teu sonho.</p><Link to="/catalogo">Começar a aprender <ArrowRight size={14}/></Link></div>
       <div className="user-profile"><span className="avatar">EC</span><div><strong>Estudante convidado</strong><small>Perfil de demonstração</small></div></div></div>
