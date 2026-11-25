@@ -1,3 +1,4 @@
+import { LessonProgress } from '@/components/bookar/LessonProgress';
 import { biologyProgress } from '@/data/biologyProgress';
 import { BiologyDiagram } from '@/components/bookar/BiologyDiagram';
 import { createFileRoute, Link, notFound, redirect } from '@tanstack/react-router';
@@ -44,5 +45,5 @@ function Lesson() {
       <Link className="underline" to="/avaliacao/biologia/$topico" params={{topico:String(number)}}>Fazer avaliação do tópico {number}</Link>
     </section>
     {next && (reviewOpen || number <= completed) && <Link to="/biologia/$topico" params={{topico:next.id}}>Próxima aula · {next.title}</Link>}
-  </article>;
+  <LessonProgress id={topic.id}/></article>;
 }

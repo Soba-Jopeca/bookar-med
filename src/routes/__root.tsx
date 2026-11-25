@@ -13,6 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ProgressProvider } from '@/components/bookar/Progress';
+import { LessonProgressProvider } from '@/components/bookar/LessonProgress';
 import { Shell } from '@/components/bookar/Shell';
 
 function NotFoundComponent() {
@@ -125,7 +126,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <ProgressProvider><Shell><Outlet /></Shell></ProgressProvider>
+      <ProgressProvider><LessonProgressProvider><Shell><Outlet /></Shell></LessonProgressProvider></ProgressProvider>
     </QueryClientProvider>
   );
 }

@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router';
 import { ArrowUpRight, Calculator, Dna, FlaskConical, Languages } from 'lucide-react';
+import { curriculum } from '@/data/curriculum';
 import { subjects } from '@/data/bookar';
 const icons = { math: Calculator, biology: Dna, chemistry: FlaskConical, language: Languages };
 export function SubjectCards() {
@@ -8,7 +9,7 @@ export function SubjectCards() {
     return <Link key={subject.id} to="/disciplinas/$disciplina" params={{ disciplina: subject.id }} className={`subject-card ${subject.tone}`}>
       <div className="subject-top"><span className="subject-tile"><Icon size={23}/></span><ArrowUpRight size={18} className="text-muted-foreground"/></div>
       <h3>{subject.name}</h3><p>{subject.description}</p>
-      <div className="subject-divider"/><div className="subject-status"><span>{subject.available ? '1 aula demonstrativa' : 'Conteúdo em preparação'}</span><span className={`pill ${subject.available ? 'green' : ''}`}>{subject.available ? 'Demonstração' : 'Em breve'}</span></div>
+      <div className="subject-divider"/><div className="subject-status"><span>{subject.id === 'matematica' ? 20 : curriculum[subject.id]?.length} tópicos</span></div>
     </Link>;
   })}</div>;
 }

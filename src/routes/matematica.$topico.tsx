@@ -1,3 +1,4 @@
+import { LessonProgress } from '@/components/bookar/LessonProgress';
 import { extraMathPractice } from '@/data/mathProgress';
 import { requireMathTopic } from '@/components/bookar/MathLessonLink';
 import { MathPractice, MathAssessmentLink } from '@/components/bookar/MathPractice';
@@ -35,5 +36,5 @@ function Lesson() {
     <h2>{n}.4 · A tua vez</h2><p>{lesson.question}</p>
     <details><summary>Conferir resolução</summary><p>{lesson.answer}</p></details>
     <MathPractice topic={n} items={lesson.practice}/><MathAssessmentLink topic={n} heading={`${n}.7`}/>
-  </article>;
+  <LessonProgress id={`math-${n}`}/></article>;
 }

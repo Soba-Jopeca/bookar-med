@@ -11,11 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CatalogoRouteImport } from './routes/catalogo'
+import { Route as EstudarRouteImport } from './routes/estudar'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as ModalidadesRouteImport } from './routes/modalidades'
 import { Route as AulaMAT01RouteImport } from './routes/aula.MAT-01'
 import { Route as AulaMATFQRouteImport } from './routes/aula.MAT-FQ'
 import { Route as BiologiaTopicoRouteImport } from './routes/biologia.$topico'
 import { Route as DisciplinasDisciplinaRouteImport } from './routes/disciplinas.$disciplina'
+import { Route as EstudoTopicoRouteImport } from './routes/estudo.$topico'
 import { Route as MatematicaTopicoRouteImport } from './routes/matematica.$topico'
 import { Route as PraticaMATFQRouteImport } from './routes/pratica.MAT-FQ'
 import { Route as AvaliacaoBiologiaTopicoRouteImport } from './routes/avaliacao.biologia.$topico'
@@ -29,6 +32,16 @@ const IndexRoute = IndexRouteImport.update({
 const CatalogoRoute = CatalogoRouteImport.update({
   id: '/catalogo',
   path: '/catalogo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstudarRoute = EstudarRouteImport.update({
+  id: '/estudar',
+  path: '/estudar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ModalidadesRoute = ModalidadesRouteImport.update({
@@ -56,6 +69,11 @@ const DisciplinasDisciplinaRoute = DisciplinasDisciplinaRouteImport.update({
   path: '/disciplinas/$disciplina',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EstudoTopicoRoute = EstudoTopicoRouteImport.update({
+  id: '/estudo/$topico',
+  path: '/estudo/$topico',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MatematicaTopicoRoute = MatematicaTopicoRouteImport.update({
   id: '/matematica/$topico',
   path: '/matematica/$topico',
@@ -81,11 +99,14 @@ const AvaliacaoMatematicaTopicoRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/catalogo': typeof CatalogoRoute
+  '/estudar': typeof EstudarRoute
+  '/login': typeof LoginRoute
   '/modalidades': typeof ModalidadesRoute
   '/aula/MAT-01': typeof AulaMAT01Route
   '/aula/MAT-FQ': typeof AulaMATFQRoute
   '/biologia/$topico': typeof BiologiaTopicoRoute
   '/disciplinas/$disciplina': typeof DisciplinasDisciplinaRoute
+  '/estudo/$topico': typeof EstudoTopicoRoute
   '/matematica/$topico': typeof MatematicaTopicoRoute
   '/pratica/MAT-FQ': typeof PraticaMATFQRoute
   '/avaliacao/biologia/$topico': typeof AvaliacaoBiologiaTopicoRoute
@@ -94,11 +115,14 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/catalogo': typeof CatalogoRoute
+  '/estudar': typeof EstudarRoute
+  '/login': typeof LoginRoute
   '/modalidades': typeof ModalidadesRoute
   '/aula/MAT-01': typeof AulaMAT01Route
   '/aula/MAT-FQ': typeof AulaMATFQRoute
   '/biologia/$topico': typeof BiologiaTopicoRoute
   '/disciplinas/$disciplina': typeof DisciplinasDisciplinaRoute
+  '/estudo/$topico': typeof EstudoTopicoRoute
   '/matematica/$topico': typeof MatematicaTopicoRoute
   '/pratica/MAT-FQ': typeof PraticaMATFQRoute
   '/avaliacao/biologia/$topico': typeof AvaliacaoBiologiaTopicoRoute
@@ -108,11 +132,14 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/catalogo': typeof CatalogoRoute
+  '/estudar': typeof EstudarRoute
+  '/login': typeof LoginRoute
   '/modalidades': typeof ModalidadesRoute
   '/aula/MAT-01': typeof AulaMAT01Route
   '/aula/MAT-FQ': typeof AulaMATFQRoute
   '/biologia/$topico': typeof BiologiaTopicoRoute
   '/disciplinas/$disciplina': typeof DisciplinasDisciplinaRoute
+  '/estudo/$topico': typeof EstudoTopicoRoute
   '/matematica/$topico': typeof MatematicaTopicoRoute
   '/pratica/MAT-FQ': typeof PraticaMATFQRoute
   '/avaliacao/biologia/$topico': typeof AvaliacaoBiologiaTopicoRoute
@@ -123,11 +150,14 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/catalogo'
+    | '/estudar'
+    | '/login'
     | '/modalidades'
     | '/aula/MAT-01'
     | '/aula/MAT-FQ'
     | '/biologia/$topico'
     | '/disciplinas/$disciplina'
+    | '/estudo/$topico'
     | '/matematica/$topico'
     | '/pratica/MAT-FQ'
     | '/avaliacao/biologia/$topico'
@@ -136,11 +166,14 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/catalogo'
+    | '/estudar'
+    | '/login'
     | '/modalidades'
     | '/aula/MAT-01'
     | '/aula/MAT-FQ'
     | '/biologia/$topico'
     | '/disciplinas/$disciplina'
+    | '/estudo/$topico'
     | '/matematica/$topico'
     | '/pratica/MAT-FQ'
     | '/avaliacao/biologia/$topico'
@@ -149,11 +182,14 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/catalogo'
+    | '/estudar'
+    | '/login'
     | '/modalidades'
     | '/aula/MAT-01'
     | '/aula/MAT-FQ'
     | '/biologia/$topico'
     | '/disciplinas/$disciplina'
+    | '/estudo/$topico'
     | '/matematica/$topico'
     | '/pratica/MAT-FQ'
     | '/avaliacao/biologia/$topico'
@@ -163,11 +199,14 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CatalogoRoute: typeof CatalogoRoute
+  EstudarRoute: typeof EstudarRoute
+  LoginRoute: typeof LoginRoute
   ModalidadesRoute: typeof ModalidadesRoute
   AulaMAT01Route: typeof AulaMAT01Route
   AulaMATFQRoute: typeof AulaMATFQRoute
   BiologiaTopicoRoute: typeof BiologiaTopicoRoute
   DisciplinasDisciplinaRoute: typeof DisciplinasDisciplinaRoute
+  EstudoTopicoRoute: typeof EstudoTopicoRoute
   MatematicaTopicoRoute: typeof MatematicaTopicoRoute
   PraticaMATFQRoute: typeof PraticaMATFQRoute
   AvaliacaoBiologiaTopicoRoute: typeof AvaliacaoBiologiaTopicoRoute
@@ -188,6 +227,20 @@ declare module '@tanstack/react-router' {
       path: '/catalogo'
       fullPath: '/catalogo'
       preLoaderRoute: typeof CatalogoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estudar': {
+      id: '/estudar'
+      path: '/estudar'
+      fullPath: '/estudar'
+      preLoaderRoute: typeof EstudarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/modalidades': {
@@ -225,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DisciplinasDisciplinaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/estudo/$topico': {
+      id: '/estudo/$topico'
+      path: '/estudo/$topico'
+      fullPath: '/estudo/$topico'
+      preLoaderRoute: typeof EstudoTopicoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/matematica/$topico': {
       id: '/matematica/$topico'
       path: '/matematica/$topico'
@@ -259,11 +319,14 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CatalogoRoute: CatalogoRoute,
+  EstudarRoute: EstudarRoute,
+  LoginRoute: LoginRoute,
   ModalidadesRoute: ModalidadesRoute,
   AulaMAT01Route: AulaMAT01Route,
   AulaMATFQRoute: AulaMATFQRoute,
   BiologiaTopicoRoute: BiologiaTopicoRoute,
   DisciplinasDisciplinaRoute: DisciplinasDisciplinaRoute,
+  EstudoTopicoRoute: EstudoTopicoRoute,
   MatematicaTopicoRoute: MatematicaTopicoRoute,
   PraticaMATFQRoute: PraticaMATFQRoute,
   AvaliacaoBiologiaTopicoRoute: AvaliacaoBiologiaTopicoRoute,

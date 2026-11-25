@@ -1,3 +1,4 @@
+import { useLessonProgress } from './LessonProgress';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link, useLocation } from '@tanstack/react-router';
 import { BookOpen, House, GraduationCap, ArrowRight, Menu, X, NotebookPen, ClipboardCheck, Timer, Search, Sprout } from 'lucide-react';
@@ -5,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { useProgress } from './Progress';
 export function Brand() { return <><span className="brandmark"><BookOpen size={31}/><span>+</span></span><span>bookar<span className="brand-light">med</span></span></>; }
 export function Shell({ children }: { children: ReactNode }) {
+  const { session } = useLessonProgress();
   const pathname = useLocation({ select: l => l.pathname });
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLButtonElement>(null);
@@ -35,6 +37,7 @@ export function Shell({ children }: { children: ReactNode }) {
       <div className="nav-label">O teu espaço</div>
       <nav className="side-nav">
         <Link to="/" className={pathname === '/' ? 'active' : ''}><House size={19}/>Início</Link>
+        <Link to="/estudar" className={pathname === '/estudar' ? 'active' : ''}>Área de estudo</Link>
         <Link to="/catalogo" className={pathname.includes('catalogo') || pathname.includes('disciplinas') || pathname.startsWith('/aula') ? 'active' : ''}><BookOpen size={19}/>Trilhas de estudo<span className="nav-count">4</span></Link>
       </nav>
       <div className="nav-label">Aprender & avaliar</div>
@@ -44,7 +47,7 @@ export function Shell({ children }: { children: ReactNode }) {
         <Link to="/modalidades"><Timer size={19}/>Simulado</Link>
       </nav>
       <div className="sidebar-bottom"><div className="side-note"><Sprout size={22}/><strong>Pequenos passos.<br/>Grandes futuros.</strong><p>Um tópico de cada vez, mais perto do teu sonho.</p><Link to="/catalogo">Começar a aprender <ArrowRight size={14}/></Link></div>
-      <div className="user-profile"><span className="avatar">EC</span><div><strong>Estudante convidado</strong><small>Perfil de demonstração</small></div></div></div>
+      <Link to="/login" className="user-profile"><span className="avatar">{session ? "AC" : "EC"}</span><div><strong>{session ? "A minha conta" : "Entrar ou criar conta"}</strong><small>{session ? "Progresso por conta" : "Acesso de visitante disponível"}</small></div></Link></div>
     </aside>
     <div className="main-shell"><div className="demo-ribbon">PROVA DE CONCEITO <span>·</span> Dados de demonstração <span>·</span> Conteúdo sujeito a revisão pedagógica</div>
       <header className="topbar"><Button ref={menuRef} variant="ghost" size="icon" className="mobile-menu" aria-label="Abrir menu" aria-expanded={open} onClick={() => setOpen(true)}><Menu/></Button><span className="topbar-label"><Search size={17}/>O que vamos aprender hoje?</span><div className="topright"><span className="pill"><i className="status-dot"/>Preparação para Medicina</span><GraduationCap size={21}/><span className="avatar">EC</span></div></header>

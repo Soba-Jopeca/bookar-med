@@ -1,14 +1,41 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
-import { ArrowRight, ArrowUpRight, BookOpen, CheckCircle2, Circle, GraduationCap, NotebookPen, Sparkles, Sun, Timer } from 'lucide-react';
+import { ArrowRight, BookOpen, CheckCircle2, LogIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { HeroArt } from '@/components/bookar/HeroArt';
 import { SubjectCards } from '@/components/bookar/SubjectCards';
-import { useProgress } from '@/components/bookar/Progress';
 import { pageHead } from '@/data/bookar';
-export const Route = createFileRoute('/')({ head: () => pageHead('O teu futuro começa aqui', 'Bookar Med da Soba Academy - Mentoria do Soba. Preparação para o acesso à Medicina em Angola.'), component: Index });
-function Index() {
-  const { progress } = useProgress();
-  const steps = Number(progress?.lessonVisited ?? false) + Number(progress?.checked ?? false);
-  const resumeTo = progress?.activity === 'practice' ? '/pratica/MAT-FQ' : '/aula/MAT-FQ';
-  return <><header className="page-heading"><div className="eyebrow">Aprender. Praticar. Evoluir.</div><h1>Olá, futuro médico.<Sun size={25} className="greeting-sun"/></h1><p>Cada sessão de estudo é um passo em direcção ao teu futuro.</p></header><div className="home-grid"><div><section className="hero"><div className="hero-copy"><span className="hero-pill">UM SONHO. UM PLANO. UM DIA DE CADA VEZ.</span><h2>O próximo capítulo<br/>da tua vida <em>começa aqui.</em></h2><p>Constrói uma base sólida para o acesso à Medicina, com estudo guiado e prática com propósito.</p><div className="hero-actions"><Button variant="lime" asChild><Link to={progress ? resumeTo : '/catalogo'}>{progress ? 'Continuar estudos' : 'Iniciar estudos'}<ArrowRight/></Link></Button></div></div><HeroArt/></section><div className="stats"><div className="stat"><span className="stat-icon"><BookOpen size={18}/></span><div><strong>4</strong><small>Disciplinas de estudo</small></div></div><div className="stat"><span className="stat-icon"><NotebookPen size={18}/></span><div><strong>1</strong><small>Aula demonstrativa</small></div></div><div className="stat"><span className="stat-icon"><Sparkles size={18}/></span><div><strong>1</strong><small>Prática disponível</small></div></div><div className="stat"><span className="stat-icon"><GraduationCap size={18}/></span><div><strong>Medicina</strong><small>Preparação para o acesso</small></div></div></div><div className="section-head"><div><h2>As tuas trilhas de estudo</h2><p>Quatro disciplinas. Um objectivo em comum.</p></div><Link to="/catalogo" className="text-link">Explorar todas<ArrowUpRight size={14}/></Link></div><SubjectCards/><section className="banner"><span className="subject-tile"><Timer size={23}/></span><div><h3>Um passo além da aula.</h3><p>Conhece as modalidades de aprendizagem.</p></div><Button asChild variant="outline"><Link to="/modalidades">Explorar<ArrowRight/></Link></Button></section></div><aside className="aside-stack"><section className="daily"><div className="daily-title"><h3>O teu primeiro passo</h3><Sparkles size={18}/></div><p>Consistência vale mais que pressa.</p><div className={`goal-ring ${steps === 1 ? 'step-one' : steps === 2 ? 'step-two' : ''}`}><strong>{steps}/2</strong><small>etapas da demonstração</small></div><div className="checkline">{progress?.lessonVisited ? <CheckCircle2 size={16}/> : <Circle size={16}/>}<span>Consultar a aula MAT-FQ</span></div><div className="checkline">{progress?.checked ? <CheckCircle2 size={16}/> : <Circle size={16}/>}<span>Responder à prática</span></div><Button variant="secondary" asChild><Link to={progress ? resumeTo : '/catalogo'}>{progress ? 'Retomar actividade' : 'Vamos a isso'}<ArrowRight/></Link></Button></section><section className="daily"><div className="daily-title"><h3>O teu ritmo de estudo</h3><BookOpen size={17}/></div><div className="last-activity"><span className="subject-tile"><NotebookPen size={20}/></span><div><strong>{progress ? 'Função quadrática' : 'Um novo começo'}</strong><small>{progress ? (progress.activity === 'practice' ? 'Última actividade: prática' : 'Última actividade: aula') : 'A tua primeira aula espera por ti.'}</small></div></div><p>{progress ? 'Progresso demonstrativo guardado neste navegador.' : 'Cada grande percurso começa com uma aula.'}</p></section><blockquote className="quote">“O futuro que imaginas constrói-se nas escolhas de hoje.”<small>UM LEMBRETE BOOKAR MED</small></blockquote></aside></div></>;
+
+export const Route = createFileRoute('/')({
+  head: () => pageHead('Preparação para Medicina', 'Bookar Med, um projecto da Soba Academy - Mentoria do Soba, por João Caneca.'),
+  component: Landing,
+});
+
+function Landing() {
+  return <>
+    <section className="overflow-hidden rounded-3xl bg-[#163d34] p-6 text-[#f4f8ef] sm:p-10">
+      <div className="grid items-center gap-9 lg:grid-cols-2">
+        <div>
+          <p className="mb-4 text-sm font-semibold text-[#cbdea1]">Soba Academy · Mentoria do Soba</p>
+          <h1 className="text-4xl font-semibold leading-tight sm:text-5xl">Prepara-te para o acesso à Medicina.</h1>
+          <p className="mt-4 max-w-lg text-base leading-relaxed text-[#d8e5dc]">Estuda ao teu ritmo, resolve exercícios com feedback e identifica os tópicos que precisas de rever.</p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Button asChild variant="lime"><Link to="/catalogo">Iniciar estudos <ArrowRight/></Link></Button>
+            <Button asChild variant="secondary"><Link to="/login"><LogIn/> Entrar</Link></Button>
+          </div>
+          <p className="mt-6 text-sm text-[#d8e5dc]">Bookar Med · Um projecto de João Caneca</p>
+        </div>
+        <div className="rounded-2xl bg-[#f4f8ef] p-5 text-[#163d34] sm:p-7">
+          <p className="flex items-center gap-2 text-sm font-semibold"><BookOpen size={18}/> Experimenta uma aula</p>
+          <h2 className="mt-3 text-2xl font-semibold">Potências e radicais</h2>
+          <p className="mt-2">Quanto vale √49?</p>
+          <details className="my-4 rounded-xl border border-[#789386] p-3">
+            <summary className="cursor-pointer font-medium">Conferir resolução</summary>
+            <p className="mt-2 flex gap-2"><CheckCircle2 size={19}/> 7, porque 7 × 7 = 49 e a raiz quadrada é não negativa.</p>
+          </details>
+          <Link className="font-semibold underline" to="/aula/MAT-01">Abrir aula de demonstração</Link>
+        </div>
+      </div>
+    </section>
+    <section className="mt-8"><h2 className="mb-3 text-2xl font-semibold">Trilhas de estudo</h2><SubjectCards/></section>
+    <p className="mt-6"><Link className="underline" to="/estudar">Abrir área de estudo</Link></p>
+  </>;
 }
